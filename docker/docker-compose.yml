@@ -1,0 +1,92 @@
+version: '3.8'
+
+services:
+
+    # Service - test-app-db-server
+    test-app-db-server:
+        container_name: test-app-db-server
+        image: postgres:12.4
+        restart: always
+        ports:
+            - "5432:5432"
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=123454555
+            - POSTGRES_DB=hrdb
+
+# Service - hr-public-service
+    hr-public-service:
+        container_name: hr-public-service
+        image: img/hr-public-service:1.0.0
+        restart: always
+        ports:
+            - "8082:8082"
+        depends_on:
+            - test-app-db-server
+
+# Service - test-app-db-server
+    test-app-db-server:
+        container_name: test-app-db-server
+        image: postgres:12.4
+        restart: always
+        ports:
+            - "5432:5432"
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=123454555
+            - POSTGRES_DB=sales
+
+# Service - sales--service
+    sales--service:
+        container_name: sales--service
+        image: img/sales--service:1.0.0
+        restart: always
+        ports:
+            - "8082:8082"
+        depends_on:
+            - test-app-db-server
+
+# Service - test-app-db-server
+    test-app-db-server:
+        container_name: test-app-db-server
+        image: postgres:12.4
+        restart: always
+        ports:
+            - "5432:5432"
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=123454555
+            - POSTGRES_DB=sales
+
+# Service - sales-stock-service
+    sales-stock-service:
+        container_name: sales-stock-service
+        image: img/sales-stock-service:1.0.0
+        restart: always
+        ports:
+            - "8082:8082"
+        depends_on:
+            - test-app-db-server
+
+# Service - test-app-db-server
+    test-app-db-server:
+        container_name: test-app-db-server
+        image: postgres:12.4
+        restart: always
+        ports:
+            - "5432:5432"
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=123454555
+            - POSTGRES_DB=sales
+
+# Service - sales-marketing-service
+    sales-marketing-service:
+        container_name: sales-marketing-service
+        image: img/sales-marketing-service:1.0.0
+        restart: always
+        ports:
+            - "8082:8082"
+        depends_on:
+            - test-app-db-server
+
